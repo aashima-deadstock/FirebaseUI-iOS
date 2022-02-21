@@ -29,12 +29,17 @@
 /** @var kSignInButtonWidth
     @brief The width of the sign in buttons.
  */
-static const CGFloat kSignInButtonWidth = 220.0f;
+static const CGFloat kSignInButtonWidth = 48.0f;
 
 /** @var kSignInButtonHeight
     @brief The height of the sign in buttons.
  */
-static const CGFloat kSignInButtonHeight = 40.0f;
+static const CGFloat kSignInButtonHeight = 48.0f;
+
+/** @var kSignInButtonHorizontalMargin
+    @brief The horizontal margin between sign in buttons.
+ */
+static const CGFloat kSignInButtonHorizontalMargin = 30.0f;
 
 /** @var kSignInButtonVerticalMargin
     @brief The vertical margin between sign in buttons.
@@ -44,7 +49,7 @@ static const CGFloat kSignInButtonVerticalMargin = 24.0f;
 /** @var kButtonContainerBottomMargin
     @brief The magin between sign in buttons and the bottom of the content view.
  */
-static const CGFloat kButtonContainerBottomMargin = 48.0f;
+static const CGFloat kButtonContainerBottomMargin = 16.0f;
 
 /** @var kButtonContainerTopMargin
     @brief The margin between sign in buttons and the top of the content view.
@@ -54,7 +59,7 @@ static const CGFloat kButtonContainerTopMargin = 16.0f;
 /** @var kTOSViewBottomMargin
     @brief The margin between privacy policy and TOS view and the bottom of the content view.
  */
-static const CGFloat kTOSViewBottomMargin = 24.0f;
+static const CGFloat kTOSViewBottomMargin = 0.0f;
 
 /** @var kTOSViewHorizontalMargin
     @brief The margin between privacy policy and TOS view and the left or right of the content view.
@@ -119,10 +124,14 @@ static const CGFloat kTOSViewHorizontalMargin = 16.0f;
 
   NSInteger numberOfButtons = self.authUI.providers.count;
 
-  CGFloat buttonContainerViewHeight =
-      kSignInButtonHeight * numberOfButtons + kSignInButtonVerticalMargin * (numberOfButtons);
-  CGRect buttonContainerViewFrame = CGRectMake(0, 0, kSignInButtonWidth, buttonContainerViewHeight);
+//  CGFloat buttonContainerViewHeight =
+//      kSignInButtonHeight * numberOfButtons + kSignInButtonVerticalMargin * (numberOfButtons);
+//  CGRect buttonContainerViewFrame = CGRectMake(0, 0, kSignInButtonWidth, buttonContainerViewHeight );
+  CGFloat buttonContainerViewWidth =
+     kSignInButtonWidth * numberOfButtons + kSignInButtonHorizontalMargin * (numberOfButtons);
+  CGRect buttonContainerViewFrame = CGRectMake(0, 0, buttonContainerViewWidth, kSignInButtonHeight);
   _buttonContainerView = [[UIView alloc] initWithFrame:buttonContainerViewFrame];
+
   if (_scrollView) {
     [_contentView addSubview:_buttonContainerView];
   } else {
@@ -131,7 +140,7 @@ static const CGFloat kTOSViewHorizontalMargin = 16.0f;
     [self.view addSubview:_buttonContainerView];
   }
 
-  CGRect buttonFrame = CGRectMake(0, 0, kSignInButtonWidth, kSignInButtonHeight);
+  CGRect buttonFrame = CGRectMake(kSignInButtonHorizontalMargin/2, 0, kSignInButtonWidth, kSignInButtonHeight);
   for (id<FUIAuthProvider> providerUI in self.authUI.providers) {
     UIButton *providerButton =
         [[FUIAuthSignInButton alloc] initWithFrame:buttonFrame providerUI:providerUI];
@@ -141,7 +150,7 @@ static const CGFloat kTOSViewHorizontalMargin = 16.0f;
     [_buttonContainerView addSubview:providerButton];
 
     // Make the frame for the new button.
-    buttonFrame.origin.y += (kSignInButtonHeight + kSignInButtonVerticalMargin);
+    buttonFrame.origin.x += (kSignInButtonWidth + kSignInButtonHorizontalMargin);
   }
 
   _privacyPolicyAndTOSView.authUI = self.authUI;
