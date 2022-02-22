@@ -236,17 +236,17 @@ NS_ASSUME_NONNULL_BEGIN
                                      fromBundle:[FUIOAuth bundle]];
   UIColor *buttonColor = [UIColor blackColor];
   UIColor *buttonTextColor = [UIColor whiteColor];
-  if (userInterfaceStyle == UIUserInterfaceStyleDark) {
-    iconImage = [iconImage imageWithTintColor:[UIColor blackColor]];
-    buttonColor = [UIColor whiteColor];
-    buttonTextColor = [UIColor blackColor];
-  } else if (userInterfaceStyle == UIUserInterfaceStyleLight) {
-    iconImage = [iconImage imageWithTintColor:[UIColor whiteColor]];
-    buttonColor = [UIColor blackColor];
-    buttonTextColor = [UIColor whiteColor];
-  } else {
-    iconImage = [iconImage imageWithTintColor:[UIColor whiteColor]];
-  }
+//  if (userInterfaceStyle == UIUserInterfaceStyleDark) {
+//    iconImage = [iconImage imageWithTintColor:[UIColor blackColor]];
+//    buttonColor = [UIColor whiteColor];
+//    buttonTextColor = [UIColor blackColor];
+//  } else if (userInterfaceStyle == UIUserInterfaceStyleLight) {
+//    iconImage = [iconImage imageWithTintColor:[UIColor whiteColor]];
+//    buttonColor = [UIColor blackColor];
+//    buttonTextColor = [UIColor whiteColor];
+//  } else {
+//    iconImage = [iconImage imageWithTintColor:[UIColor whiteColor]];
+//  }
   FUIOAuth *provider = [[FUIOAuth alloc] initWithAuthUI:authUI
                                              providerID:@"apple.com"
                                         buttonLabelText:@"Sign in with Apple"
